@@ -39,8 +39,4 @@ public class Product {
         String formattedPrice = String.format("%,d원", price);
         return name + " | " + formattedPrice + " | " + description;
     }
-
-
-
-
 }

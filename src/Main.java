@@ -17,7 +17,7 @@ public class Main {
                 "Galaxy S26 Ultra 1TB",
                 2260000,
                 "갤럭시 S26 울트라는 ‘프라이버시 디스플레이 + AI 성능 강화 + 200MP 카메라’를 핵심으로 한 삼성의 2026년형 최상위 플래그십 스마트폰",
-                101
+                10
         );
         Product Earphones = new Product(
                 "Galaxy Buds4 Pro",
@@ -40,7 +40,7 @@ public class Main {
 
         System.out.println("[ 실시간 커머스 플랫폼 - 전자제품 ]");
 
-
+    while (true) {
         for (int i = 0; i < products.size(); i++) {
             System.out.println((i + 1) + ". " + products.get(i).toMenuLine());
         }
@@ -52,10 +52,13 @@ public class Main {
 
         if (choice == 0) {
             System.out.println("프로그램을 종료합니다.");
+            break;
         } else {
             Product selected = products.get(choice - 1);
             selected.printInfo();
         }
+
+    }
         scanner.close();
     }
 
