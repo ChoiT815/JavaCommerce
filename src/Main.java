@@ -77,7 +77,7 @@ public class Main {
         Product meat = new Product(
                 "소불고기",
                 26000,
-                "불고기",
+                "소불고기",
                 10
         );
 

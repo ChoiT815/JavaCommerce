@@ -12,7 +12,7 @@ public class CommerceSystem {
 
     public void start(Scanner scanner) {
         while (true) {
-
+            printMenu();
 
             System.out.print("번호를 입력하세요: ");
             int choice = scanner.nextInt();
