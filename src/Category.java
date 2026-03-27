@@ -3,9 +3,9 @@ import java.util.List;
 
 public class Category {
     // 속성
-    // 상위 개념(전자제품/의류/식품 등) 이름
+    // 카테고리 이름(예: "전자제품", "의류")
     private final String name;
-    // Product 목록은 이제 Category가 관리
+    //해당 카테고리에 속한 상품(Product) 목록
     private final List<Product> products = new ArrayList<>();
 
     // 생성자
@@ -18,6 +18,25 @@ public class Category {
     public String getName() {
         return name;
     }
+    // 카테고리에 상품을 추가하는 메서드
+    public  void addProduct(Product product) {
+        products.add(product);
+    }
+    // 카테고리에 속한 상품 목록을 반환하는 메서드
+    public List<Product> getProducts() {
+        return products;
+    }
 
+    // 카테고리 상품 목록 출력 메서드
+    public void printProductsMenu() {
+        System.out.println();
+        System.out.println("[ " + name + " 카테고리 ]");
+
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println((i + 1) + ". " + products.get(i).toMenuString());
+        }
+
+        System.out.println("0. 뒤로가기");
+    }
 
 }
