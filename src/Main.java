@@ -73,6 +73,13 @@ public class Main {
                 10
         );
 
+        Product shorts = new Product(
+                "아디다스 데님 쇼츠",
+                119000,
+                "아디다스 데님 쇼츠",
+                10
+        );
+
         // 음식
         Product meat = new Product(
                 "소불고기",
@@ -88,6 +95,31 @@ public class Main {
                 10
         );
 
+        Product kimchistew = new Product(
+                "시골 김치찌개 350g (30개)",
+                83500,
+                "시골 김치찌개 350g (30개)",
+                10
+        );
+
+        Product doenjangstew = new Product(
+                "된장찌개 밀키트 450g",
+                9000,
+                "된장찌개 밀키트 450g",
+                10
+        );
+
+        Product porkbelly = new Product(
+                "대패 삼겹살 1kg",
+                10900,
+                "대패 삼겹살 1kg",
+                10
+        );
+
+
+
+
+
         // 전자제품
         electronics.addProduct(laptop);
         electronics.addProduct(phone1);
@@ -99,10 +131,13 @@ public class Main {
         // 의류
         clothes.addProduct(jacket1);
         clothes.addProduct(jacket2);
+        clothes.addProduct(shorts);
 
         // 음식
         food.addProduct(meat);
         food.addProduct(kimchi);
+        food.addProduct(kimchistew);
+        food.addProduct(doenjangstew);
 
         CommerceSystem system = new CommerceSystem(categories);
         system.start(scanner);
