@@ -23,12 +23,12 @@ public class CommerceSystem {
             int choice = scanner.nextInt();
 
             if (choice == 0) {
-                System.out.println("프로그램을 종료합니다.");
+                System.out.println("커머스 플랫폼을 종료합니다. ");
                 break;
             }
 
             if (choice < 1 || choice > products.size()) {
-                System.out.println("잘못된 번호입니다.");
+                System.out.println("잘못된 번호입니다. ");
                 continue;
             }
 
@@ -40,7 +40,13 @@ public class CommerceSystem {
     }
 
     private void printMenu() {
+        System.out.println("[ 실시간 커머스 플랫폼 - 전자제품 ]");
 
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println((i + 1) + ". " + products.get(i).toMenuLine());
+        }
+
+        System.out.println("0. 종료 | 프로그램 종료");
     }
 
 }
