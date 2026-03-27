@@ -1,42 +1,62 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         List<Product> products = new ArrayList<>();
 
+        // 사용자 입력 도구 (start()에서 반복 사용)
+        Scanner scanner = new Scanner(System.in);
+
         Product laptop = new Product(
                 "LG그램 17 윈도우11 애로우레이크 엘지 노트북",
                 2333000,
-                "LG 그램 17은 “17인치 대화면인데도 1.3kg대 초경량”을 실현한 노트북",
+                "LG그램 17 윈도우11 애로우레이크 엘지 노트북",
                 10
         );
-        Product phone = new Product(
+        Product phone1 = new Product(
                 "Galaxy S26 Ultra 1TB",
                 2260000,
-                "갤럭시 S26 울트라는 ‘프라이버시 디스플레이 + AI 성능 강화 + 200MP 카메라’를 핵심으로 한 삼성의 2026년형 최상위 플래그십 스마트폰",
+                "Galaxy S26 Ultra 1TB",
                 10
         );
-        Product earphones = new Product(
+        Product phone2 = new Product(
+                "Iphone 16 ProMax",
+                2479500,
+                "Iphone 16 ProMax",
+                10
+        );
+        Product earphones1 = new Product(
                 "Galaxy Buds4 Pro",
                 359000,
-                "갤럭시 버즈 시리즈의 프로급 무선 이어폰으로, ANC(적응형 액티브 노이즈 캔슬링) 성능과 음질, 방수 등급이 기본형 버즈4보다 강화된 모델",
+                "Galaxy Buds4 Pro",
+                10
+        );
+        Product earphones2 = new Product(
+                "AirPods Pro 3",
+                369000,
+                "AirPods Pro 3",
                 10
         );
         Product headset = new Product(
-                "Apple 2024 AirPods Max Noise Cancelling Bluetooth Headphones",
+                "Apple 2024 AirPods Headphones",
                 613490,
-                "Apple이 출시한 액티브 노이즈 캔슬링을 지원하는 블루투스 헤드폰",
+                "Apple 2024 AirPods Headphones",
                 10
         );
 
         products.add(laptop);
-        products.add(phone);
-        products.add(earphones);
+        products.add(phone1);
+        products.add(phone2);
+        products.add(earphones1);
+        products.add(earphones2);
         products.add(headset);
 
         CommerceSystem system = new CommerceSystem(products);
-        system.start();
+        system.start(scanner);
+        scanner.close();
+
     }
 
 }
