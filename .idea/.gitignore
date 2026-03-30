@@ -3,7 +3,7 @@
 /workspace.xml
 /misc.xml
 /modules.xml
-vcs.xml
+/vcs.xml
 # 쿼리 파일을 포함한 무시된 디폴트 폴더
 /queries/
 # Datasource local storage ignored files
