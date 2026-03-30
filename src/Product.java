@@ -21,6 +21,23 @@ public class Product {
         this.stock = stock;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+
     // 3. 기능
     // 상품 목록에서 간단히 보여주는 메서드
     public String toMenuString() {

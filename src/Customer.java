@@ -16,7 +16,7 @@ public class Customer {
         this.grade = grade;
     }
 
-    // 기능(게터)
+    // 기능
     // 고객 이름을 반환하는 메서드
     public String getName() {
         return name;

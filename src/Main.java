@@ -116,10 +116,6 @@ public class Main {
                 10
         );
 
-
-
-
-
         // 전자제품
         electronics.addProduct(laptop);
         electronics.addProduct(phone1);
@@ -138,6 +134,7 @@ public class Main {
         food.addProduct(kimchi);
         food.addProduct(kimchistew);
         food.addProduct(doenjangstew);
+        food.addProduct(porkbelly);
 
         CommerceSystem system = new CommerceSystem(categories);
         system.start(scanner);
