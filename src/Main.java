@@ -136,10 +136,8 @@ public class Main {
         food.addProduct(doenjangstew);
         food.addProduct(porkbelly);
 
-        CommerceSystem system = new CommerceSystem(categories);
-        system.start(scanner);
-        scanner.close();
-
+        CommerceSystem system = new CommerceSystem(categories, scanner);
+        system.start();
     }
 
 }

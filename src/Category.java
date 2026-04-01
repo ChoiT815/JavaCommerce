@@ -24,19 +24,9 @@ public class Category {
     }
     // 카테고리에 속한 상품 목록을 반환하는 메서드
     public List<Product> getProducts() {
+
         return products;
     }
 
-    // 카테고리 상품 목록 출력 메서드
-    public void printProductsMenu() {
-        System.out.println();
-        System.out.println("[ " + name + " 카테고리 ]");
-
-        for (int i = 0; i < products.size(); i++) {
-            System.out.println((i + 1) + ". " + products.get(i).toMenuString());
-        }
-
-        System.out.println("0. 뒤로가기");
     }
 
-}

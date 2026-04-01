@@ -1,107 +1,145 @@
+
 import java.util.List;
 import java.util.Scanner;
 
-
 public class CommerceSystem {
-      // 속성
-      // 시스템이 관리할 상품 목록 (main에서 주입받음)
-      private final List<Category> categories;
 
-      // CommerceSystem 생성자
-      public CommerceSystem(List<Category> categories) {
-        this.categories = categories;  // main에서 만든 리스트를 그대로 받는다.
+    // 1. 속성
+    // 시스템이 관리하는 전체 카테고리 목록
+    private final List<Category> categories;
+
+    // 사용자로부터 입력을 받기 위한 Scanner
+    private final Scanner scanner;
+
+    // 2. 생성자
+    public CommerceSystem(List<Category> categories, Scanner scanner) {
+        this.categories = categories;
+        this.scanner = scanner;
     }
 
-    // 기능
-    public void start(Scanner scanner) {
+    // 3. 기능
+    // 프로그램 시작 메서드
+    public void start() {
         while (true) {
-            printMenu();
-
-            System.out.print("번호를 입력하세요: ");
-            int choice = readInt(scanner, "번호를 입력하세요: ");
-
-            // 0번 입력 시 프로그램 종료
-            if (choice == 0) {
-                System.out.println("커머스 플랫폼을 종료합니다. ");
-                break;
+            boolean exit = runShop();
+            if (exit) {
+                System.out.println("커머스 플랫폼을 종료합니다.");
+                return;
             }
-
-            // 잘못된 번호 입력 처리
-            if (choice < 1 || choice > categories.size()) {
-                System.out.println("잘못된 번호입니다. ");
-                continue;
-            }
-
-            // 선택한 카테고리 조회
-            Category selectedCategory = categories.get(choice - 1);
-            System.out.println("[" + selectedCategory.getName() + "] 카테고리를 선택하셨습니다." );
-
-            // 선택한 카테고리 내부 메뉴 실행
-            runCategory(scanner, selectedCategory);
         }
     }
 
-    // 카테고리 내부(상품 목록) 메뉴 실행
-    private void runCategory(Scanner scanner, Category category) {
+    // 쇼핑 흐름을 담당하는 메서드
+    private boolean runShop() {
+        Category selectedCategory = selectCategory();
+        if (selectedCategory == null) {
+            return true; // 종료
+        }
+
+        runProductMenu(selectedCategory);
+        return false; // 다시 메인
+    }
+
+
+    // CATEGORY (카테고리 담당 메서드 묶음)
+    // 출력 + 입력 + 선택을 하나의 메서드로 결합
+    private Category selectCategory() {
         while (true) {
-            // 카테고리 내 상품 목록 출력
-            category.printProductsMenu();
+            System.out.println();
+            System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
 
-            int choice = readInt(scanner, "번호를 입력하세요: ");
+            int index = 1;
+            for (Category c : categories) {
+                System.out.println(index++ + ". " + c.getName());
+            }
+            System.out.println("0. 종료     | 프로그램 종료");
 
-            // 0번 입력 시 메인 메뉴로 복귀
+            int choice = readInt("번호를 입력하세요: ");
+
+            // 0번 → 프로그램 종료 신호
             if (choice == 0) {
-                // 뒤로가기 -> 메인 메뉴로 복귀
-                return;
+                return null; // 종료
             }
 
-            List<Product> products = category.getProducts();
+            // 출력한 순서 그대로 선택
+            int i = 1;
+            for (Category c : categories) {
+                if (i++ == choice) {
+                    return c;
+                }
+            }
 
-            // 잘못된 상품 번호 입력 처리
-            if(choice < 1 || choice > products.size()) {
+            System.out.println("잘못된 번호입니다.");
+        }
+    }
+
+
+    // PRODUCT (상품 담당 메서드 묶음)
+    // 출력 + 입력 + 선택을 하나의 흐름으로 처리
+    private void runProductMenu(Category category) {
+        List<Product> products = category.getProducts();
+
+        while (true) {
+            System.out.println();
+            System.out.println("[ " + category.getName() + " 상품 목록 ]");
+
+            int index = 1;
+            for (Product p : products) {
+                System.out.println(index++ + ". " + p.toMenuString());
+            }
+            System.out.println("0. 뒤로가기");
+
+            int choice = readInt("번호를 입력하세요: ");
+
+            // 0번 → 카테고리 메뉴로 복귀
+            if (choice == 0) {
+                return; // 카테고리로 복귀
+            }
+
+            // 출력한 순서 그대로 상품 선택
+            int i = 1;
+            Product selected = null;
+            for (Product p : products) {
+                if (i++ == choice) {
+                    selected = p;
+                    break;
+                }
+            }
+
+            if (selected == null) {
                 System.out.println("잘못된 번호입니다.");
                 continue;
             }
 
-            // 선택한 상품 조회
-            Product selectedProduct = products.get(choice - 1);
-
-            //선택한 상품 상세 정보 출력
-            System.out.println("선택한 상품: " + selectedProduct.toDetailString());
-
-            //상품 선택 후 카테고리 종료 -> 메인으로
-            return;
+            printProductDetail(selected);
         }
     }
 
-    // 메인 메뉴 출력
-    private void printMenu() {
+    // 상품 상세 정보 출력
+    private void printProductDetail(Product product) {
         System.out.println();
-        System.out.println("[ 실시간 커머스 플랫폼 메인]");
-
-        for(int i = 0; i < categories.size(); i++) {
-            System.out.println((i + 1) + ". " + categories.get(i).getName());
-        }
-
-        System.out.println("0. 종료     | 프로그램 종료");
+        System.out.println("[상품 상세]");
+        System.out.println(product.toDetailString());
+        pressEnter("엔터를 누르면 목록으로 돌아갑니다...");
     }
 
-    // 숫자 입력 안전 처리(문자 입력해도 안 터짐)
-    private int readInt(Scanner scanner, String prompt) {
+    //INPUT (입력 처리 공통 기능)
+    private int readInt(String prompt) {
         while (true) {
             System.out.print(prompt);
+            String input = scanner.nextLine();
 
-            if(scanner.hasNextInt()) {
-                int value = scanner.nextInt();
-                scanner.nextLine(); //개행 제거
-                return value;
-            } else  {
-                scanner.nextLine(); // 잘못 입력한 토근 버림
+            try {
+                return Integer.parseInt(input.trim());
+            } catch (NumberFormatException e) {
                 System.out.println("숫자를 입력해주세요.");
             }
         }
     }
 
+    // 엔터 입력을 대기하는 메서드
+    private void pressEnter(String prompt) {
+        System.out.print(prompt);
+        scanner.nextLine();
+    }
 }
-
-

@@ -24,11 +24,13 @@ public class Customer {
 
     // 고객 이메일을 반환하는 메서드
     public String getEmail() {
+
         return email;
     }
 
     // 고객 등급(VIP, 일반 등)을 반환하는 메서드
     public  String getGrade() {
+
         return grade;
     }
 
