@@ -22,6 +22,23 @@ public class Category {
     public void addProduct(Product product) {
         products.add(product);
     }
+
+    public void printProducts() {
+        int index = 1;
+        for(Product product : products) {
+            System.out.println(index++ + ". " + product.toMenuString());
+        }
+
+        System.out.println("0. 뒤로가기");
+    }
+
+    public Product selectProduct(int choice) {
+        if(choice < 1 || choice > products.size()) {
+            return null;
+        }
+        return products.get(choice - 1);
+    }
+
     // 카테고리에 속한 상품 목록을 반환하는 메서드
     public List<Product> getProducts() {
 

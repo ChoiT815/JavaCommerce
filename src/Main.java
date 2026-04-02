@@ -8,7 +8,7 @@ public class Main {
         List<Category> categories = new ArrayList<>();
 
         // 카테고리 생성
-        Category electronics = new Category("전자제품");
+        Category electronics =  new Category("전자제품");
         Category clothes = new Category("의류");
         Category food = new Category("음식");
 

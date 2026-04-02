@@ -77,17 +77,11 @@ public class CommerceSystem {
     // PRODUCT (상품 담당 메서드 묶음)
     // 출력 + 입력 + 선택을 하나의 흐름으로 처리
     private void runProductMenu(Category category) {
-        List<Product> products = category.getProducts();
-
         while (true) {
             System.out.println();
             System.out.println("[ " + category.getName() + " 상품 목록 ]");
 
-            int index = 1;
-            for (Product p : products) {
-                System.out.println(index++ + ". " + p.toMenuString());
-            }
-            System.out.println("0. 뒤로가기");
+            category.printProducts();
 
             int choice = readInt("번호를 입력하세요: ");
 
@@ -95,16 +89,8 @@ public class CommerceSystem {
             if (choice == 0) {
                 return; // 카테고리로 복귀
             }
-
+            Product selected = category.selectProduct(choice);
             // 출력한 순서 그대로 상품 선택
-            int i = 1;
-            Product selected = null;
-            for (Product p : products) {
-                if (i++ == choice) {
-                    selected = p;
-                    break;
-                }
-            }
 
             if (selected == null) {
                 System.out.println("잘못된 번호입니다.");
@@ -136,6 +122,7 @@ public class CommerceSystem {
             }
         }
     }
+
 
     // 엔터 입력을 대기하는 메서드
     private void pressEnter(String prompt) {
